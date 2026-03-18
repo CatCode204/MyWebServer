@@ -29,7 +29,7 @@ namespace MyWebServer.SDK
 		{
 			while (!cancellationToken.IsCancellationRequested)
 			{
-				var clientSocket = await socket.AcceptAsync();
+				var clientSocket = await socket.AcceptAsync(cancellationToken);
 				onClientConnectTasks.Add(OnClientConnectHandleAsync(clientSocket));
 			}
 			await Task.WhenAll(onClientConnectTasks);
@@ -43,19 +43,32 @@ namespace MyWebServer.SDK
 				var stopToken = stopTokenSrc.Token;
 				var stopConnectTokenSrc = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, stopToken);
 
-				MSHttpRequest request = await RecieveRequestAsync(clientSocket, stopConnectTokenSrc.Token);
-			}
 
-			clientSocket.Close();
+				var request = await RecieveRequestAsync(clientSocket, stopTokenSrc.Token);
+
+				var body = "<h1>Hello World!</h1>";
+				var httpResponse = new MSHttpResponse();
+				httpResponse.Headers.Add("Content-Length", Encoding.UTF8.GetByteCount(body).ToString());
+				httpResponse.Headers.Add("Content-Type", "text/html");
+				httpResponse.BodyWriter = new StringResponseBodyWriter(body);
+
+				var networkStream = new NetworkStream(clientSocket);
+
+				IResponseWriter writer = new MSHttpResponseWriter(httpResponse);
+				await writer.WriteAsync(networkStream);
+
+				clientSocket.Close();
+			}
 		}
 
 		private async Task<MSHttpRequest> RecieveRequestAsync(Socket clientSocket, CancellationToken cancellationToken)
 		{
 			byte[] buffer = new byte[4096];
-			var r = await clientSocket.ReceiveAsync(buffer, cancellationToken);
+			var r = await clientSocket.ReceiveAsync(buffer,cancellationToken);
 			string request = Encoding.UTF8.GetString(buffer, 0, r);
 
-			return requestBuilder.Build(request);
+			var result = requestBuilder.Build(request);
+			return result;
 		}
 	}
 }

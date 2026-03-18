@@ -14,7 +14,7 @@ namespace MyWebServer.Tests
 		public void TestParseHeader_Simple()
 		{
 			var headers = "Host: example.com\r\nConnection: keep-alive\r\n";
-			IHeadersParser parser = new HeadersParser();
+			IHeadersParser parser = new HttpHeaderParser();
 			var result = parser.ParseHeaders(headers);
 
 			Assert.IsNotNull(result);
@@ -29,7 +29,7 @@ namespace MyWebServer.Tests
 		public void TestParseHeader_TrimsWhitespace()
 		{
 			var headers = "Content-Type:   text/plain; charset=utf-8  \r\nX-Custom:  value\r\n";
-			IHeadersParser parser = new HeadersParser();
+			IHeadersParser parser = new HttpHeaderParser();
 			var result = parser.ParseHeaders(headers);
 
 			Assert.IsTrue(result.ContainsKey("Content-Type"));
@@ -42,7 +42,7 @@ namespace MyWebServer.Tests
 		public void TestParseHeader_InvalidLine_Throws()
 		{
 			var headers = "BadHeaderLineWithoutColon\r\n";
-			IHeadersParser parser = new HeadersParser();
+			IHeadersParser parser = new HttpHeaderParser();
 
 			try
 			{

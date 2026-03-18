@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.SDK
 {
-	public class RequestLineParser : IRequestLineParser
+	public class HttpRequestLineParser : IRequestLineParser
 	{
-		public RequestLine ParseLine(string line)
+		public HttpRequestLine ParseLine(string line)
 		{
 			var lineComponents = line.Split(' ');
 			string lineMethod = lineComponents[0];
@@ -42,7 +42,7 @@ namespace MyWebServer.SDK
 			var path = lineComponents[1];
 			var version = lineComponents[2];
 
-			return new RequestLine() { Method = method, Path = path, Version = version };
+			return new HttpRequestLine() { Method = method, Path = path, Version = version };
 		}
 	}
 }

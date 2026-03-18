@@ -23,7 +23,7 @@ namespace MyWebServer.SDK
 			string headerStr = headerAndBody[0];
 			string[] headerList = headerStr.Split("\r\n");
 
-			RequestLine requestLine = requestLineParser.ParseLine(headerList[0]);
+			HttpRequestLine requestLine = requestLineParser.ParseLine(headerList[0]);
 			Dictionary<string, string> headers = headersParser.ParseHeaders(String.Join("\r\n", headerList[1..]));
 			byte[]? body = headerAndBody.Length > 1 ? Encoding.UTF8.GetBytes(headerAndBody[1]) : null;
 

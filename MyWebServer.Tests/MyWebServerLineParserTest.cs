@@ -9,7 +9,7 @@ namespace MyWebServer.Tests
 		public void TestParse1()
 		{
 			var line = "GET / HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Get, requestLine.Method);
@@ -21,7 +21,7 @@ namespace MyWebServer.Tests
 		public void TestParse2()
 		{
 			var line = "get / HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Get, requestLine.Method);
@@ -33,7 +33,7 @@ namespace MyWebServer.Tests
 		public void TestParse3()
 		{
 			var line = "POST /id HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Post, requestLine.Method);
@@ -45,7 +45,7 @@ namespace MyWebServer.Tests
 		public void TestParse4()
 		{
 			var line = "post /id HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Post, requestLine.Method);
@@ -57,7 +57,7 @@ namespace MyWebServer.Tests
 		public void TestParse5()
 		{
 			var line = "PUT /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Put, requestLine.Method);
@@ -69,7 +69,7 @@ namespace MyWebServer.Tests
 		public void TestParse6()
 		{
 			var line = "put /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Put, requestLine.Method);
@@ -81,7 +81,7 @@ namespace MyWebServer.Tests
 		public void TestParse7()
 		{
 			var line = "PATCH /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Patch, requestLine.Method);
@@ -93,7 +93,7 @@ namespace MyWebServer.Tests
 		public void TestParse8()
 		{
 			var line = "patch /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Patch, requestLine.Method);
@@ -105,7 +105,7 @@ namespace MyWebServer.Tests
 		public void TestParse9()
 		{
 			var line = "DELETE /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Delete, requestLine.Method);
@@ -117,7 +117,7 @@ namespace MyWebServer.Tests
 		public void TestParse10()
 		{
 			var line = "delete /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Delete, requestLine.Method);
@@ -129,7 +129,7 @@ namespace MyWebServer.Tests
 		public void TestParse11()
 		{
 			var line = "delete /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			var requestLine = requestLineParser.ParseLine(line);
 			Assert.IsNotNull(requestLine);
 			Assert.AreEqual(MSHttpMethods.Delete, requestLine.Method);
@@ -141,7 +141,7 @@ namespace MyWebServer.Tests
 		public void TestParse12()
 		{
 			var line = "hello /user HTTP/1.1";
-			IRequestLineParser requestLineParser = new RequestLineParser();
+			IRequestLineParser requestLineParser = new HttpRequestLineParser();
 			try
 			{
 				requestLineParser.ParseLine(line);

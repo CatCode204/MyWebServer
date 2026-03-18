@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="MyWebServer.SDK/MyWebServer.SDK.csproj" />
+  <Project Path="MyWebServer.Tests/MyWebServer.Tests.csproj" />
   <Project Path="MyWebServer/MyWebServer.csproj" />
 </Solution>

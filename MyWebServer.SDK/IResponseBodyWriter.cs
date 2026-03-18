@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.SDK
 {
-	public interface IRequestLineParser // Stupid but practice
+	public interface IResponseBodyWriter
 	{
-		HttpRequestLine ParseLine(string line);
+		Task WriteAsync(Stream stream);
 	}
 }
