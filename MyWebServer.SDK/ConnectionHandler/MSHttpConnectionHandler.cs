@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MyWebServer.SDK.Request;
+using MyWebServer.SDK.Response;
+using MyWebServer.SDK.Response.BodyWriter;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.SDK
+namespace MyWebServer.SDK.ConnectionHandler
 {
 	public class MSHttpConnectionHandler : IConnectionHandler
 	{

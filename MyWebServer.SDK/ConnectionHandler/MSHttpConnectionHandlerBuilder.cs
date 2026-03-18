@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MyWebServer.SDK.Request;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.SDK
+namespace MyWebServer.SDK.ConnectionHandler
 {
 	public static class MSHttpConnectionHandlerBuilder
 	{

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.SDK
+namespace MyWebServer.SDK.Response
 {
 	public class MSHttpResponseWriter : IResponseWriter
 	{

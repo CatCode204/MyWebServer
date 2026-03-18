@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.SDK
+namespace MyWebServer.SDK.Response
 {
-	public interface IResponseBodyWriter
+	public interface IResponseWriter
 	{
 		Task WriteAsync(Stream stream);
 	}

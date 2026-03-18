@@ -1,4 +1,4 @@
-using MyWebServer.SDK;
+using MyWebServer.SDK.ConnectionHandler;
 using System.Net.Sockets;
 
 namespace MyWebServer

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MyWebServer.SDK.Response.BodyWriter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.SDK
+namespace MyWebServer.SDK.Response
 {
 	public class MSHttpResponse
 	{

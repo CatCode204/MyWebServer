@@ -1,4 +1,4 @@
-﻿using MyWebServer.SDK;
+﻿using MyWebServer.SDK.Request;
 
 namespace MyWebServer.Tests
 {

@@ -1,4 +1,4 @@
-﻿namespace MyWebServer.SDK
+﻿namespace MyWebServer.SDK.Request
 {
 	public class MSHttpRequest
 	{
