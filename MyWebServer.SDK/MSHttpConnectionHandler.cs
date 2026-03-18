@@ -46,7 +46,7 @@ namespace MyWebServer.SDK
 
 				var request = await RecieveRequestAsync(clientSocket, stopTokenSrc.Token);
 
-				var body = "<h1>Hello World!</h1>";
+				var body = @"<h1>Hello World!</h1>";
 				var httpResponse = new MSHttpResponse();
 				httpResponse.Headers.Add("Content-Length", Encoding.UTF8.GetByteCount(body).ToString());
 				httpResponse.Headers.Add("Content-Type", "text/html");
@@ -57,8 +57,12 @@ namespace MyWebServer.SDK
 				IResponseWriter writer = new MSHttpResponseWriter(httpResponse);
 				await writer.WriteAsync(networkStream);
 
-				clientSocket.Close();
+				if (!request.Headers.ContainsKey("Connection") || !request.Headers["Connection"].Equals("keep-alive"))
+				{
+					break;
+				}
 			}
+			clientSocket.Close();
 		}
 
 		private async Task<MSHttpRequest> RecieveRequestAsync(Socket clientSocket, CancellationToken cancellationToken)
