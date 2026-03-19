@@ -7,24 +7,18 @@ namespace MyWebServer
 	{
 		private readonly ILogger<Worker> _logger;
 		private readonly Socket _socket;
+		private readonly MSHttpConnectionHandlerBuilder _httpConnectionHandlerBuilder;
 
-		public Worker(ILogger<Worker> logger, Socket socket)
+		public Worker(ILogger<Worker> logger, Socket socket, MSHttpConnectionHandlerBuilder httpConnectionHandlerBuilder)
 		{
 			_logger = logger;
 			_socket = socket;
+			_httpConnectionHandlerBuilder = httpConnectionHandlerBuilder;
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
-			//while (!stoppingToken.IsCancellationRequested)
-			//{
-			//	if (_logger.IsEnabled(LogLevel.Information))
-			//	{
-			//		_logger.LogInformation("Worker is running at: {time}", DateTimeOffset.Now);
-			//	}
-			//	await Task.Delay(1000,stoppingToken);
-			//}
-			IConnectionHandler connectionHandler = MSHttpConnectionHandlerBuilder.Build(_socket, stoppingToken);
+			IConnectionHandler connectionHandler = _httpConnectionHandlerBuilder.Build(_socket, stoppingToken);
 			await connectionHandler.HandleConnectionAsync();
 		}
 	}

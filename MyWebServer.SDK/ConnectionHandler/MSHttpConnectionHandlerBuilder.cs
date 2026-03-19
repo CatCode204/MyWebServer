@@ -1,4 +1,6 @@
 ﻿using MyWebServer.SDK.Request;
+using MyWebServer.SDK.Request.HeaderParser;
+using MyWebServer.SDK.Request.RequestLineParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.SDK.ConnectionHandler
 {
-	public static class MSHttpConnectionHandlerBuilder
+	public class MSHttpConnectionHandlerBuilder
 	{
-		public static IRequestLineParser RequestLineParser { get; set; } = new HttpRequestLineParser();
-		public static IHeadersParser HeadersParser { get; set; } = new HttpHeaderParser();
-		public static IConnectionHandler Build(Socket socket, CancellationToken cancellationToken)
+		public IRequestLineParser RequestLineParser { get; set; } = new HttpRequestLineParser();
+		public IHeadersParser HeadersParser { get; set; } = new HttpHeaderParser();
+		public IConnectionHandler Build(Socket socket, CancellationToken cancellationToken)
 		{
 			return new MSHttpConnectionHandler(
 				new MSHttpRequestBuilder(RequestLineParser, HeadersParser),

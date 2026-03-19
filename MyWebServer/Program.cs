@@ -1,4 +1,5 @@
 using MyWebServer.SDK;
+using MyWebServer.SDK.ConnectionHandler;
 using System.Net;
 using System.Net.Sockets;
 
@@ -10,17 +11,21 @@ namespace MyWebServer
 		{
 			var builder = Host.CreateApplicationBuilder(args);
 
-			var IP = builder.Configuration.GetSection("Server").GetValue<string>("IP") ?? throw new KeyNotFoundException("IP in configuration not found");
-			int port = builder.Configuration.GetSection("Server").GetValue<int>("Port");
+			builder.Services.AddTransient<MSHttpConnectionHandlerBuilder, MSHttpConnectionHandlerBuilder>();
+			builder.Services.AddHostedService<Worker>(
+				serviceProvider => {
+					var IP = builder.Configuration.GetSection("Server").GetValue<string>("IP") ?? throw new KeyNotFoundException("IP in configuration not found");
+					int port = builder.Configuration.GetSection("Server").GetValue<int>("Port");
 
-			var socketEndpoint = new IPEndPoint(IPAddress.Parse(IP), port);
-			var socket = new Socket(socketEndpoint.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+					var socketEndpoint = new IPEndPoint(IPAddress.Parse(IP), port);
+					var socket = new Socket(socketEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-			socket.Bind(socketEndpoint);
-			socket.Listen();
+					socket.Bind(socketEndpoint);
+					socket.Listen();
 
-			builder.Services.AddTransient<Socket>(builder => socket);
-			builder.Services.AddHostedService<Worker>();
+					return new Worker(serviceProvider.GetRequiredService<ILogger<Worker>>(), socket, serviceProvider.GetRequiredService<MSHttpConnectionHandlerBuilder>());
+				}
+			);
 
 			var host = builder.Build();
 			host.Run();

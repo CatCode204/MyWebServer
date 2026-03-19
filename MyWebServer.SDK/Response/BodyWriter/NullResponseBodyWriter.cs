@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.SDK.Response.BodyWriter
 {
-	public class NullResponseBodyWriter : IResponseBodyWriter
+	internal class NullResponseBodyWriter : IResponseBodyWriter
 	{
 		public Task WriteAsync(Stream stream)
 		{

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.SDK.ConnectionHandler
 {
-	public class MSHttpConnectionHandler : IConnectionHandler
+	internal class MSHttpConnectionHandler : IConnectionHandler
 	{
 		private const int CLIENT_NOT_SEND_TIMEOUT = 3000;
 
